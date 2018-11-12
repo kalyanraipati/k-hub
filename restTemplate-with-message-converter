@@ -1,0 +1,22 @@
+@PostConstruct
+	public void init() {
+		this.restTemplate = new RestTemplate();
+		this.restTemplate.setMessageConverters(Lists.newArrayList(mappingJacksonHttpMessageConverter()));
+	}
+
+	private MappingJackson2HttpMessageConverter mappingJacksonHttpMessageConverter() {
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		converter.setObjectMapper(objectMapper());
+		return converter;
+	}
+
+	private ObjectMapper objectMapper() {
+		final ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.registerModule(new StringTrimModule());
+		objectMapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		objectMapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+		return objectMapper;
+	}
