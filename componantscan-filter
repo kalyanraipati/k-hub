@@ -1,0 +1,6 @@
+@ComponentScan(basePackages = { "com.app"}, excludeFilters = {
+		@ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.app.*") })
+
+@ComponentScan(basePackages = { "com.app"}, excludeFilters = {
+		@ComponentScan.Filter(type = FilterType.ASPECTJ, pattern = "com.app..*"),
+		@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = { ClassName.class }) })
