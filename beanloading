@@ -1,0 +1,2 @@
+@ConditionalOnProperty(prefix = "spring", name = "example.values")
+will only load beans if the condition met
