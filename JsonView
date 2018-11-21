@@ -1,0 +1,27 @@
+public void run(String... args) throws Exception {
+
+		User u = new User(1, "Kalyan");
+		ClassRoom room = new ClassRoom(u);
+		System.out.println(new ObjectMapper().writerWithView(View.class).writeValueAsString(room));
+
+	}
+  
+public class View {
+	public interface ImageView {
+	}
+}
+
+@Data
+@AllArgsConstructor
+public class User {
+	@JsonView(View.ImageView.class)
+	private int id;
+	private String name;
+
+}
+
+@Data
+@AllArgsConstructor
+public class ClassRoom {
+	private User user;
+}
